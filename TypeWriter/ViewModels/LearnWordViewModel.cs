@@ -1,18 +1,19 @@
-﻿using CsvHelper;
-using NAudio.Wave;
-using Nito.AsyncEx;
-using NLog;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using CsvHelper;
+using NAudio.Wave;
+using Nito.AsyncEx;
+using NLog;
+using TypeWriter.Services;
 
-namespace TypeWriter.UserInterface
+namespace TypeWriter.ViewModels
 {
-    internal class LearnWordViewModel : BindableBase, IDialogAware
+    internal class LearnWordViewModel : BindableBase, IDialogAware, IDisposable
     {
         private readonly AppConfigSource _appConfigSource;
         private readonly IEventAggregator _eventAggregator;
@@ -25,15 +26,16 @@ namespace TypeWriter.UserInterface
         private Color _backColor;
         private int _boxHeight;
         private int _boxWidth;
+        private bool _disposed;
         private Color _fontColor;
         private FontFamily _fontFamily;
         private double _fontSize;
         private FontStretch _fontStretch;
         private FontStyle _fontStyle;
         private FontWeight _fontWeight;
+        private bool _isPaused;
         private Logger _logger = LogManager.GetCurrentClassLogger();
         private string _word;
-        private bool _isPaused;
 
         public LearnWordViewModel(WordSource wordSource, AppConfigSource appConfigSource, IEventAggregator eventAggregator)
         {
@@ -58,29 +60,9 @@ namespace TypeWriter.UserInterface
             _fontWeight = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Weight;
             _accent = _appConfigSource.GetConfig().LearnWordOption.Accent;
 
-            _eventAggregator.GetEvent<AppConfigChangedEvent>().Subscribe(() =>
-            {
-                BackColor = _appConfigSource.GetConfig().LearnWordOption.BackColor;
-                BoxHeight = _appConfigSource.GetConfig().LearnWordOption.BoxHeight;
-                BoxWidth = _appConfigSource.GetConfig().LearnWordOption.BoxWidth;
-                FontColor = _appConfigSource.GetConfig().LearnWordOption.FontInfo.BrushColor.Color;
-                FontSize = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Size;
-                FontFamily = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Family;
-                FontStretch = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Stretch;
-                FontStyle = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Style;
-                FontWeight = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Weight;
-                Accent = _appConfigSource.GetConfig().LearnWordOption.Accent;
-            });
+            _eventAggregator.GetEvent<AppConfigChangedEvent>().Subscribe(ChangeConfigs);
 
-            _eventAggregator.GetEvent<PlayWordAudioEvent>().Subscribe(() =>
-            {
-                _isPaused = false;
-            });
-
-            _eventAggregator.GetEvent<PauseWordAudioEvent>().Subscribe(() =>
-            {
-                _isPaused = true;
-            });
+            _eventAggregator.GetEvent<PlayWordAudioEvent>().Subscribe(ToggleWordAudioPlayStatus);
 
             ReadPhonetic();
 
@@ -101,6 +83,13 @@ namespace TypeWriter.UserInterface
         }
 
         public event Action<IDialogResult> RequestClose;
+
+        private void ToggleWordAudioPlayStatus()
+        {
+            _isPaused = !_isPaused;
+        }
+
+        #region Properties
 
         public Accent Accent
         {
@@ -165,6 +154,8 @@ namespace TypeWriter.UserInterface
             set => SetProperty(ref _fontWeight, value);
         }
 
+        #endregion Properties
+
         public DelegateCommand<KeyEventArgs> KeyDownCommand { get; set; }
         public DelegateCommand NextCommand { get; set; }
 
@@ -197,6 +188,16 @@ namespace TypeWriter.UserInterface
             return false;
         }
 
+        public void Dispose()
+        {
+            if (!_disposed)
+            {
+                _eventAggregator.GetEvent<AppConfigChangedEvent>().Unsubscribe(ChangeConfigs);
+                _eventAggregator.GetEvent<PlayWordAudioEvent>().Unsubscribe(ToggleWordAudioPlayStatus);
+                _disposed = true;
+            }
+        }
+
         public void OnDialogClosed()
         {
         }
@@ -205,13 +206,27 @@ namespace TypeWriter.UserInterface
         {
         }
 
+        private void ChangeConfigs()
+        {
+            BackColor = _appConfigSource.GetConfig().LearnWordOption.BackColor;
+            BoxHeight = _appConfigSource.GetConfig().LearnWordOption.BoxHeight;
+            BoxWidth = _appConfigSource.GetConfig().LearnWordOption.BoxWidth;
+            FontColor = _appConfigSource.GetConfig().LearnWordOption.FontInfo.BrushColor.Color;
+            FontSize = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Size;
+            FontFamily = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Family;
+            FontStretch = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Stretch;
+            FontStyle = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Style;
+            FontWeight = _appConfigSource.GetConfig().LearnWordOption.FontInfo.Weight;
+            Accent = _appConfigSource.GetConfig().LearnWordOption.Accent;
+        }
+
         private void KeyDown(KeyEventArgs args)
         {
             if (args != null)
             {
                 TextBox textBox = args.Source as TextBox;
 
-                if (args.Key == Key.Space)
+                if (args.Key == Key.Space || args.Key == Key.Return || args.Key == Key.Escape)
                 {
                     var parent = LogicalTreeHelper.GetParent(textBox);
                     while (parent is not Window)

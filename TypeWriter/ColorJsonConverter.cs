@@ -5,7 +5,6 @@ namespace TypeWriter
 {
     public class ColorJsonConverter : JsonConverter<System.Windows.Media.Color>
     {
-
         public override bool CanConvert(Type typeToConvert)
         {
             return typeToConvert == typeof(System.Windows.Media.Color);
@@ -21,6 +20,5 @@ namespace TypeWriter
         {
             writer.WriteRawValue($"\"#{value.A:X2}{value.R:X2}{value.G:X2}{value.B:X2}\"");
         }
-
     }
 }

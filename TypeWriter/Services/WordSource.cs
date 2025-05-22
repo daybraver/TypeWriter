@@ -1,10 +1,9 @@
 ﻿using System.IO;
 
-namespace TypeWriter
+namespace TypeWriter.Services
 {
     internal class WordSource
     {
-
         private int _index;
         private List<string> _words;
 
@@ -27,6 +26,7 @@ namespace TypeWriter
 
         public void LoadWords(IEnumerable<string> words)
         {
+            _words.Clear();
             foreach (string word in words)
             {
                 if (string.IsNullOrWhiteSpace(word))
@@ -74,6 +74,5 @@ namespace TypeWriter
                 _index--;
             }
         }
-
     }
 }

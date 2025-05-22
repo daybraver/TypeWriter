@@ -1,11 +1,10 @@
 ﻿using System.Windows.Media;
-using WpfColorFontDialog;
+using XamlPearls.XamlFont;
 
 namespace TypeWriter
 {
     internal class ObservableLearnWordOption : BindableBase
     {
-
         private readonly LearnWordOption learnWordOption;
 
         public ObservableLearnWordOption()
@@ -77,6 +76,5 @@ namespace TypeWriter
                 RaisePropertyChanged();
             }
         }
-
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System.IO;
 
-namespace TypeWriter
+namespace TypeWriter.Services
 {
     internal class SentenceSource
     {
-
         private string[][] _allWords;
         private int _nextMatchCharIndex;
         private int _nextMatchLineIndex;
@@ -21,8 +20,8 @@ namespace TypeWriter
         {
             get
             {
-                return _allWords == null || _allWords.Length == 0 || (_nextMatchLineIndex >= _allWords.Length)
-                    || (_nextMatchLineIndex == _allWords.Length - 1 && _nextMatchWordIndex == _allWords[_nextMatchLineIndex].Length - 1 && _nextMatchCharIndex >= _allWords[_nextMatchLineIndex][_nextMatchWordIndex].Length);
+                return _allWords == null || _allWords.Length == 0 || _nextMatchLineIndex >= _allWords.Length
+                    || _nextMatchLineIndex == _allWords.Length - 1 && _nextMatchWordIndex == _allWords[_nextMatchLineIndex].Length - 1 && _nextMatchCharIndex >= _allWords[_nextMatchLineIndex][_nextMatchWordIndex].Length;
             }
         }
 
@@ -63,7 +62,7 @@ namespace TypeWriter
 
         public void LoadText(string path)
         {
-            if (System.IO.Path.GetExtension(path).ToLower() != ".txt")
+            if (Path.GetExtension(path).ToLower() != ".txt")
             {
                 throw new ArgumentException("The file extension must be .txt");
             }
@@ -105,7 +104,7 @@ namespace TypeWriter
         {
             if (EOF)
             {
-                App.Instance.TrayIcon.ShowBalloonTip("", "End Of File", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+                //App.Instance.TrayIcon.ShowBalloonTip("", "End Of File", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
                 Reset();
                 return;
             }
@@ -126,13 +125,13 @@ namespace TypeWriter
                 }
                 if (EOF)
                 {
-                    App.Instance.TrayIcon.ShowBalloonTip("", "End Of File", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+                    //App.Instance.TrayIcon.ShowBalloonTip("", "End Of File", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
                     Reset();
                 }
             }
             else
             {
-                App.Instance.TrayIcon.ShowBalloonTip("", @char.ToString(), Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+                //App.Instance.TrayIcon.ShowBalloonTip("", @char.ToString(), Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
             }
 
             CharTyped?.Invoke((TypedString, ToTypeString));
@@ -160,6 +159,5 @@ namespace TypeWriter
             _nextMatchWordIndex = 0;
             _nextMatchLineIndex = 0;
         }
-
     }
 }

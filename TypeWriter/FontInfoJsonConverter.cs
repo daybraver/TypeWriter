@@ -1,13 +1,12 @@
 ﻿using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
-using WpfColorFontDialog;
+using XamlPearls.XamlFont;
 
 namespace TypeWriter
 {
     public class FontInfoJsonConverter : System.Text.Json.Serialization.JsonConverter<FontInfo>
     {
-
         private Dictionary<string, System.Windows.FontStyle> _styles = new Dictionary<string, System.Windows.FontStyle>();
 
         public FontInfoJsonConverter()
@@ -81,6 +80,5 @@ namespace TypeWriter
             writer.WriteRawValue(System.Text.Json.JsonSerializer.Serialize(value.BrushColor.Color, options));
             writer.WriteEndObject();
         }
-
     }
 }

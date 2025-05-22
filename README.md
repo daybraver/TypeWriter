@@ -10,28 +10,52 @@ Windows 7 and  above
 
 ## .NET Framework 
 
-.NET 8 and above
+more than .NET 8 
 
 ## Third library
 
 - Prism Library
-
 - Xceed.WpfToolkit
-
-- WpfColorFontDialog
-
 - Hardcodet.NotifyIcon.Wpf
 
 ## User Manual 
 
-todo
+- 听音频
+
+[CTRL + +] 倍速
+
+[CTRL + -] 降速
+
+[CTRL + ->]  快进
+
+[CTRL + <-] 后退
+
+[CTRL + Space] 暂停/播放
+
+[CTRL + ⬇] 下一曲
+
+[CTRL + ⬆] 上一曲
+
+- 听单词
+
+[CTRL + ALT + Space] 暂停/播放
+
+[⬇] 下一个单词
+
+[⬆] 上一个单词
+
+[➡] 美音
+
+[⬅] 英音
+
+- 看文章
+
+[⬇] 下一句
+
+[⬆] 上一句
+
+右键双击输入框，可以练习盲打。
 
 ## Roadmap & issues
 
-- 添加功能：擦除最近一次输入的单词
-- 使用Material Design Theme
-- 托盘菜单使用图标按钮
-- 修改WpfColorFontDialog源码，使其字体颜色支持透明色和Hex Format
-- 添加配置项：匹配时是否忽略大小写
-- 完善Src使其更符合MVVM模式，开源到Github
 - WinRAR打包发布程序

@@ -2,14 +2,13 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace TypeWriter.UserInterface
+namespace TypeWriter.Views
 {
     /// <summary>
     /// Interaction logic for LearnWordView.xaml
     /// </summary>
     public partial class LearnWordView : UserControl
     {
-
         public LearnWordView()
         {
             InitializeComponent();
@@ -24,6 +23,5 @@ namespace TypeWriter.UserInterface
         {
             TextBox.Focus();
         }
-
     }
 }
