@@ -1,0 +1,72 @@
+﻿<UserControl
+    x:Class="TypeWriter.Views.LearnWordView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:TypeWriter.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:typewriter="clr-namespace:TypeWriter.Converters"
+    Loaded="UserControl_Loaded"
+    MouseRightButtonDown="TextBox_MouseRightButtonDown"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <typewriter:Color2BrushConverter x:Key="Color2BrushConverter" />
+    </UserControl.Resources>
+    <Grid
+        TextBlock.FontFamily="{Binding FontFamily}"
+        TextBlock.FontSize="{Binding FontSize}"
+        TextBlock.FontStretch="{Binding FontStretch}"
+        TextBlock.FontStyle="{Binding FontStyle}"
+        TextBlock.FontWeight="{Binding FontWeight}"
+        TextBlock.Foreground="{Binding FontColor, Converter={StaticResource Color2BrushConverter}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBox
+            Grid.Column="0"
+            Height="{Binding BoxHeight}"
+            MinWidth="100"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="{Binding BackColor, Converter={StaticResource Color2BrushConverter}}"
+            BorderThickness="0"
+            Foreground="{Binding FontColor, Converter={StaticResource Color2BrushConverter}}"
+            IsReadOnly="True"
+            Text="{Binding Word, Mode=OneWay}" />
+        <TextBox
+            Grid.Column="1"
+            Height="{Binding BoxHeight}"
+            MinWidth="150"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="{Binding BackColor, Converter={StaticResource Color2BrushConverter}}"
+            BorderThickness="0"
+            Foreground="{Binding FontColor, Converter={StaticResource Color2BrushConverter}}"
+            IsReadOnly="True"
+            Text="{Binding Phonetic, Mode=OneWay}" />
+        <TextBox
+            x:Name="TextBox"
+            Grid.Column="2"
+            Width="{Binding BoxWidth}"
+            Height="{Binding BoxHeight}"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="{Binding BackColor, Converter={StaticResource Color2BrushConverter}}"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            CaretBrush="Transparent"
+            Foreground="{Binding FontColor, Converter={StaticResource Color2BrushConverter}}"
+            Style="{x:Null}"
+            TextWrapping="Wrap">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewKeyDown">
+                    <prism:InvokeCommandAction Command="{Binding KeyDownCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+    </Grid>
+</UserControl>

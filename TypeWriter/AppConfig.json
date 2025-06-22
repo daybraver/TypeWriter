@@ -1,0 +1,40 @@
+﻿{
+  "AutoHide": false,
+  "BackColor": "#FFFFFFFF",
+  "DefaultMediaFolderPath": null,
+  "ForwardBackTimeMs": 2000,
+  "LearnWordOption": {
+    "Accent": 1,
+    "BackColor": "#FF000000",
+    "BoxHeight": 40,
+    "BoxWidth": 1000,
+    "FontInfo": {
+      "Size": 20,
+      "Weight": 400,
+      "Stretch": 5,
+      "Family": "Cascadia Mono",
+      "Style": "Normal",
+      "BrushColor": "#FFE04F4F"
+    }
+  },
+  "SpeedRatioDecrement": 1,
+  "SpeedRatioIncrement": 15.200001,
+  "ToTypeFont": {
+    "Size": 20,
+    "Weight": 400,
+    "Stretch": 5,
+    "Family": "Consolas",
+    "Style": "Normal",
+    "BrushColor": "#FF000000"
+  },
+  "TypeBoxHeight": 40,
+  "TypeBoxWidth": 1000,
+  "TypedFont": {
+    "Size": 20,
+    "Weight": 400,
+    "Stretch": 5,
+    "Family": "Consolas",
+    "Style": "Normal",
+    "BrushColor": "#FF000000"
+  }
+}

@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+		<ApplicationIcon>Asserts\app.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Asserts\app.ico" />
+	  <None Remove="Asserts\audio.ico" />
+	  <None Remove="Asserts\audio.png" />
+	  <None Remove="Asserts\exit.ico" />
+	  <None Remove="Asserts\exit.png" />
+	  <None Remove="Asserts\file.ico" />
+	  <None Remove="Asserts\file.png" />
+	  <None Remove="Asserts\sentense.ico" />
+	  <None Remove="Asserts\sentense.png" />
+	  <None Remove="Asserts\video.ico" />
+	  <None Remove="Asserts\video.png" />
+	  <None Remove="favicon.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="33.0.1" />
+		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
+		<PackageReference Include="LibVLCSharp" Version="3.9.3" />
+		<PackageReference Include="morelinq" Version="4.4.0" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
+		<PackageReference Include="Nito.AsyncEx.Tasks" Version="5.1.2" />
+		<PackageReference Include="NLog" Version="5.3.4" />
+		<PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+		<PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
+		<PackageReference Include="Prism.DryIoc" Version="9.0.537" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+		<PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.21" />
+		<PackageReference Include="XamlPearls" Version="1.1.0-beta1" />
+		<PackageReference Include="Xceed.Products.Wpf.Toolkit.Full" Version="4.6.24151.1544" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="AppConfig.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="word.csv">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Asserts\app.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\audio.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\audio.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\exit.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\exit.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\file.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\file.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\sentense.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\sentense.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\video.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Asserts\video.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="favicon.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <EditorConfigFiles Remove="D:\nutstore\TypeWriter\TypeWriter\.editorconfig" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="D:\nutstore\TypeWriter\TypeWriter\.editorconfig" />
+	</ItemGroup>
+</Project>

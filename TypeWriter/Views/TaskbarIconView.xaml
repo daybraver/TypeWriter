@@ -1,0 +1,90 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:TypeWriter.Converters"
+    xmlns:tb="http://www.hardcodet.net/taskbar"
+    xmlns:xcat="http://schemas.xceed.com/wpf/xaml/avalondock/themes"
+    xmlns:xcct="http://schemas.xceed.com/wpf/xaml/material/design/themes"
+    xmlns:xcdt="http://schemas.xceed.com/wpf/xaml/datagrid/themes"
+    xmlns:xclt="http://schemas.xceed.com/wpf/xaml/listbox/themes"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:xctt="http://schemas.xceed.com/wpf/xaml/toolkit/themes"
+    xmlns:xp="clr-namespace:XamlPearls;assembly=XamlPearls">
+    <local:Accent2BoolConverter x:Key="Accent2BoolConverter" />
+    <tb:TaskbarIcon
+        x:Key="TaskbarIcon"
+        Name="Self"
+        DoubleClickCommand="{Binding ShowPerformancesCommand}"
+        IconSource="/Asserts/app.ico">
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu Width="245">
+                <MenuItem Header="Select Media">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/video.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="SelectMedia" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+
+                <MenuItem Header="Listen Words">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/audio.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="ListenWords" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+
+                <MenuItem Header="Select Words Source">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/file.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="SelectWordsSource" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+
+                <MenuItem Header="Browse Sentenses">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/sentense.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="BrowseSentenses" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+
+                <MenuItem Header="Select Sentenses Source">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/file.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="SelectSentenseSource" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+
+                <MenuItem Header="Exit">
+                    <MenuItem.Icon>
+                        <Image Source="/Asserts/exit.png" />
+                    </MenuItem.Icon>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="Exit" TargetObject="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
+</ResourceDictionary>
